@@ -48,7 +48,7 @@
         <span class="menu-title">Kategori</span>
       </a>
     </li>
-  </ul>
+  </ul> 
 </nav>
 
 <div class="main-panel">
