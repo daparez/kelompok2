@@ -22,7 +22,7 @@
     </li>
 
     <li class="nav-item">
-      <a class="nav-link" href="?pages/peminjaman/index.php">
+      <a class="nav-link" href="pages/peminjaman/index.php">
         <i class="mdi mdi-swap-horizontal menu-icon"></i>
         <span class="menu-title">peminjaman</span>
       </a>

@@ -1,5 +1,5 @@
 <?php
-include 'konek.php';
+include '../../konek.php';
 
 $id = $_GET['id'];
 $data = mysqli_query($konek, "SELECT * FROM peminjaman WHERE id=$id");

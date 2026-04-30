@@ -1,5 +1,5 @@
 <?php
-include 'konek.php';
+include '../../konek.php';
 
 if (isset($_POST['submit'])) {
     $id_anggota = $_POST['id_anggota'];

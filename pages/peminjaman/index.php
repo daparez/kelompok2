@@ -1,5 +1,5 @@
 <?php
-include 'konek.php';
+include '../../konek.php';
 
 $query = "SELECT * FROM peminjaman";
 $result = mysqli_query($konek, $query);
