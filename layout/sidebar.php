@@ -15,7 +15,7 @@
     </li>
 
     <li class="nav-item">
-      <a class="nav-link" href="?page=anggota">
+      <a class="nav-link" href="pages/anggota/index.php">
         <i class="mdi mdi-account menu-icon"></i>
         <span class="menu-title">Anggota</span>
       </a>
