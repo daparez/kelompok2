@@ -13,4 +13,4 @@ if(!$konek){
     echo "konek berhasil";
 }
 
-?>
+?>  

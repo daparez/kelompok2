@@ -22,9 +22,9 @@
     </li>
 
     <li class="nav-item">
-      <a class="nav-link" href="?page=transaksi">
+      <a class="nav-link" href="?pages/peminjaman/index.php">
         <i class="mdi mdi-swap-horizontal menu-icon"></i>
-        <span class="menu-title">Transaksi</span>
+        <span class="menu-title">peminjaman</span>
       </a>
     </li>
 
