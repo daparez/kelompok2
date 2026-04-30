@@ -36,7 +36,7 @@
     </li>
 
     <li class="nav-item">
-      <a class="nav-link" href="?page=transaksi">
+      <a class="nav-link" href="pages/penulis/index.php">
         <i class="mdi mdi-swap-horizontal menu-icon"></i>
         <span class="menu-title">Penulis</span>
       </a>
