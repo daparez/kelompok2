@@ -15,39 +15,40 @@
     </li>
 
     <li class="nav-item">
-      <a class="nav-link" href="pages/anggota/index.php">
+      <a class="nav-link" href="?page=anggota">
         <i class="mdi mdi-account menu-icon"></i>
         <span class="menu-title">Anggota</span>
       </a>
     </li>
 
     <li class="nav-item">
-      <a class="nav-link" href="?page=transaksi">
+      <a class="nav-link" href="?page=peminjaman">
         <i class="mdi mdi-swap-horizontal menu-icon"></i>
-        <span class="menu-title">Transaksi</span>
+        <span class="menu-title">peminjaman</span>
       </a>
     </li>
 
     <li class="nav-item">
-      <a class="nav-link" href="?page=transaksi">
+      <a class="nav-link" href="?page=laporan">
         <i class="mdi mdi-swap-horizontal menu-icon"></i>
         <span class="menu-title">Laporan</span>
       </a>
     </li>
 
     <li class="nav-item">
-      <a class="nav-link" href="?page=transaksi">
+      <a class="nav-link" href="?page=penulis">
         <i class="mdi mdi-swap-horizontal menu-icon"></i>
         <span class="menu-title">Penulis</span>
       </a>
     </li>
 
     <li class="nav-item">
-      <a class="nav-link" href="?page=transaksi">
+      <a class="nav-link" href="?page=kategori">
         <i class="mdi mdi-swap-horizontal menu-icon"></i>
         <span class="menu-title">Kategori</span>
       </a>
     </li>
+
   </ul> 
 </nav>
 

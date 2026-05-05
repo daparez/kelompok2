@@ -1,5 +1,3 @@
-</div> <!-- content-wrapper -->
-
 <footer class="footer text-center">
   <p>© Perpustakaan 2026</p>
 </footer>

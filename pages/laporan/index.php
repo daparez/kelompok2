@@ -1,6 +1,7 @@
 <?php
 $query = mysqli_query($konek, "
-SELECT p.*, a.nama, a.kelas
+SELECT 
+    p.*, a.nama, a.kelas
 FROM peminjaman p
 JOIN anggota a ON p.id_anggota = a.id
 ORDER BY p.id DESC
@@ -9,25 +10,25 @@ ORDER BY p.id DESC
 
 <div class="card">
   <div class="card-body">
-    <h4 class="card-title">Data Peminjaman</h4>
+    <h4 class="card-title">Laporan Peminjaman</h4>
 
-    <a href="?page=peminjaman&aksi=create" class="btn btn-primary mb-3">
-      Tambah Peminjaman
+    <!-- tombol print -->
+    <a href="?page=laporan&aksi=print" target="_blank" class="btn btn-success mb-3">
+      Print PDF
     </a>
 
     <div class="table-responsive">
-      <table class="table table-bordered table-striped">
+      <table class="table table-bordered">
         <thead>
           <tr>
             <th>No</th>
             <th>Nama</th>
             <th>Kelas</th>
-            <th>Detail Buku</th>
+            <th>Buku</th>
             <th>Tgl Pinjam</th>
-            <th>Batas</th>
+            <th>Kembali</th>
             <th>Status</th>
             <th>Denda</th>
-            <th>Aksi</th>
           </tr>
         </thead>
         <tbody>
@@ -38,7 +39,6 @@ ORDER BY p.id DESC
           <td><?= $d['nama']; ?></td>
           <td><?= $d['kelas']; ?></td>
 
-          <!-- DETAIL -->
           <td>
             <?php
             $detail = mysqli_query($konek, "
@@ -49,32 +49,15 @@ ORDER BY p.id DESC
             ");
 
             while($b = mysqli_fetch_assoc($detail)){
-              echo "<span class='badge badge-info'>{$b['judul']} ({$b['jumlah']})</span><br>";
+              echo "- {$b['judul']} ({$b['jumlah']})<br>";
             }
             ?>
           </td>
 
           <td><?= $d['tanggal_pinjam']; ?></td>
           <td><?= $d['tanggal_kembali']; ?></td>
-
-          <td>
-            <?php if($d['status']=='dipinjam'): ?>
-              <span class="badge badge-warning">Dipinjam</span>
-            <?php else: ?>
-              <span class="badge badge-success">Dikembalikan</span>
-            <?php endif; ?>
-          </td>
-
+          <td><?= $d['status']; ?></td>
           <td>Rp <?= number_format($d['denda']); ?></td>
-
-          <td>
-            <?php if($d['status']=='dipinjam'): ?>
-              <a href="?page=peminjaman&aksi=kembali&id=<?= $d['id']; ?>" 
-                 class="btn btn-success btn-sm">
-                 Kembalikan
-              </a>
-            <?php endif; ?>
-          </td>
         </tr>
         <?php endwhile; ?>
 
