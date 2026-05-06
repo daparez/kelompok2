@@ -1,6 +1,8 @@
 <?php
 $kategori = mysqli_query($konek, "SELECT * FROM kategori");
 $penulis = mysqli_query($konek, "SELECT * FROM penulis");
+
+
 ?>
 
 <div class="card">

@@ -114,6 +114,9 @@ CREATE TABLE `users` (
   `nama` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+INSERT INTO user (username, password, nama)
+VALUES ('admin', 'Perpus_2026', 'Administrator');
+
 --
 -- Indexes for dumped tables
 --

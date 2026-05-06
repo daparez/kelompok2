@@ -7,6 +7,8 @@ SELECT * FROM buku WHERE id='$id'
 
 $kategori = mysqli_query($konek, "SELECT * FROM kategori");
 $penulis = mysqli_query($konek, "SELECT * FROM penulis");
+
+
 ?>
 
 <div class="card">
@@ -26,7 +28,7 @@ $penulis = mysqli_query($konek, "SELECT * FROM penulis");
           <?php while($k = mysqli_fetch_assoc($kategori)) : ?>
             <option value="<?= $k['id']; ?>" 
               <?= $k['id']==$data['id_kategori']?'selected':'' ?>>
-              <?= $k['nama_kategori']; ?>
+              <?= $k['Nama_kategori']; ?>
             </option>
           <?php endwhile; ?>
         </select>
@@ -51,7 +53,7 @@ $penulis = mysqli_query($konek, "SELECT * FROM penulis");
 
       <div class="form-group">
         <label>Tahun</label>
-        <input type="number" name="tahun" class="form-control" value="<?= $data['tahun']; ?>">
+        <input type="date" name="tahun" class="form-control" value="<?= $data['tahun']; ?>">
       </div>
 
       <div class="form-group">

@@ -1,7 +1,14 @@
 <?php 
+session_start();
 require_once 'konek.php';
 
-// routing dulu
+// proteksi login
+if(!isset($_SESSION['login'])){
+    header("Location: login.php");
+    exit;
+}
+
+// routing
 $page = $_GET['page'] ?? 'dashboard';
 $aksi = $_GET['aksi'] ?? 'index';
 
@@ -12,54 +19,111 @@ if (!in_array($page, $allowed_page)) {
     $page = 'dashboard';
 }
 
-// HAPUS BUKU
 // =======================
-if ($page == 'buku' && $aksi == 'hapus') {
-    $id = $_GET['id'];
-    mysqli_query($konek, "DELETE FROM buku WHERE id='$id'");
-    echo "<script>alert('Dihapus');location='?page=buku';</script>";
-    exit;
-}
+// HAPUS DATA (SWEET ALERT)
+// =======================
+if ($aksi == 'hapus' && isset($_GET['id'])) {
+    $id = intval($_GET['id']);
 
-// hapus anggota
-if ($page == 'anggota' && $aksi == 'hapus') {
-    $id = $_GET['id'];
-    mysqli_query($konek, "DELETE FROM anggota WHERE id='$id'");
-    echo "<script>alert('Dihapus');location='?page=anggota';</script>";
-    exit;
-}
+    // ===== HAPUS BUKU =====
+    if ($page == 'buku') {
 
-// hapus kategori
-if ($page == 'kategori' && $aksi == 'hapus') {
-    $id = $_GET['id'];
-    mysqli_query($konek, "DELETE FROM kategori WHERE id='$id'");
-    echo "<script>alert('Dihapus');location='?page=kategori';</script>";
-    exit;
-}
+        mysqli_query($konek, "DELETE FROM detail_peminjaman WHERE id_buku='$id'");
+        mysqli_query($konek, "DELETE FROM buku WHERE id='$id'");
 
-$file = "pages/$page/$aksi.php";
+        echo "<script>
+        Swal.fire({
+          icon: 'success',
+          title: 'Dihapus',
+          text: 'Buku berhasil dihapus!',
+          timer: 2000,
+          showConfirmButton: false
+        }).then(() => {
+          window.location='?page=buku';
+        });
+        </script>";
+        exit;
+    }
 
-if (!file_exists($file)) {
-    $file = "pages/$page/index.php";
-}
+    // ===== HAPUS ANGGOTA =====
+    if ($page == 'anggota') {
 
-$detail = mysqli_query($konek, "
-    SELECT * FROM detail_peminjaman WHERE id_peminjaman='$id'
-");
+        $cek = mysqli_query($konek, "SELECT * FROM peminjaman WHERE id_anggota='$id'");
 
-while($d = mysqli_fetch_assoc($detail)){
-    mysqli_query($konek, "
-        UPDATE buku SET stok = stok + {$d['jumlah']}
-        WHERE id='{$d['id_buku']}'
-    ");
+        if(mysqli_num_rows($cek) > 0){
+            echo "<script>
+            Swal.fire({
+              icon: 'error',
+              title: 'Gagal',
+              text: 'Anggota masih punya riwayat peminjaman!'
+            }).then(() => {
+              window.location='?page=anggota';
+            });
+            </script>";
+            exit;
+        }
+
+        mysqli_query($konek, "DELETE FROM anggota WHERE id='$id'");
+
+        echo "<script>
+        Swal.fire({
+          icon: 'success',
+          title: 'Dihapus',
+          text: 'Anggota berhasil dihapus!',
+          timer: 2000,
+          showConfirmButton: false
+        }).then(() => {
+          window.location='?page=anggota';
+        });
+        </script>";
+        exit;
+    }
+
+    // ===== HAPUS KATEGORI =====
+    if ($page == 'kategori') {
+
+        mysqli_query($konek, "DELETE FROM kategori WHERE id='$id'");
+
+        echo "<script>
+        Swal.fire({
+          icon: 'success',
+          title: 'Dihapus',
+          text: 'Kategori berhasil dihapus!',
+          timer: 2000,
+          showConfirmButton: false
+        }).then(() => {
+          window.location='?page=kategori';
+        });
+        </script>";
+        exit;
+    }
+
+    // ===== HAPUS PENULIS =====
+    if ($page == 'penulis') {
+
+        mysqli_query($konek, "DELETE FROM penulis WHERE id='$id'");
+
+        echo "<script>
+        Swal.fire({
+          icon: 'success',
+          title: 'Dihapus',
+          text: 'Penulis berhasil dihapus!',
+          timer: 2000,
+          showConfirmButton: false
+        }).then(() => {
+          window.location='?page=penulis';
+        });
+        </script>";
+        exit;
+    }
 }
 
 // =======================
 // LOGIKA PENGEMBALIAN
 // =======================
-if ($page == 'peminjaman' && $aksi == 'kembali') {
+if ($page == 'peminjaman' && $aksi == 'kembali' && isset($_GET['id'])) {
 
-    $id = $_GET['id'];
+    $id = intval($_GET['id']);
 
     $data = mysqli_fetch_assoc(mysqli_query($konek, "
         SELECT * FROM peminjaman WHERE id='$id'
@@ -69,7 +133,6 @@ if ($page == 'peminjaman' && $aksi == 'kembali') {
     $batas = $data['tanggal_kembali'];
 
     $telat = (strtotime($tgl_kembali_real) - strtotime($batas)) / (60*60*24);
-
     $denda = ($telat > 0) ? $telat * 3000 : 0;
 
     mysqli_query($konek, "
@@ -92,8 +155,13 @@ if ($page == 'peminjaman' && $aksi == 'kembali') {
     }
 
     echo "<script>
-        alert('Denda: Rp $denda');
-        window.location='?page=peminjaman';
+    Swal.fire({
+      icon: 'success',
+      title: 'Berhasil',
+      text: 'Buku dikembalikan. Denda: Rp $denda'
+    }).then(() => {
+      window.location='?page=peminjaman';
+    });
     </script>";
     exit;
 }

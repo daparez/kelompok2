@@ -1,6 +1,8 @@
 <?php
 $query = mysqli_query($konek, "SELECT * FROM anggota ORDER BY id DESC");
 $no = 1;
+
+
 ?>
 
 <div class="card">

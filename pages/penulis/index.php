@@ -38,7 +38,7 @@ if (!isset($konek)) {
             <a href="?page=penulis&aksi=edit&id=<?= $row['id']; ?>" 
                class="btn btn-warning btn-sm">Edit</a>
 
-            <a href="?page=penulis&aksi=hapus&id=<?= $row['id']; ?>" 
+            <a href="?page=penulis&aksi=delete&id=<?= $row['id']; ?>" 
                class="btn btn-danger btn-sm"
                onclick="return confirm('Yakin hapus?')">
                Hapus
